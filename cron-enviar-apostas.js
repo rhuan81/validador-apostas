@@ -1,0 +1,1 @@
+// lógica de envio com Supabase, Telegram e WhatsApp
