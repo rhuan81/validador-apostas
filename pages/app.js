@@ -118,3 +118,4 @@ useEffect(() => {
     </div>
   );
 }
+fix(app): proteger uso de localStorage para SSR e corrigir erro de build no Vercel
