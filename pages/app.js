@@ -119,3 +119,4 @@ useEffect(() => {
   );
 }
 fix(app): proteger uso de localStorage para SSR e corrigir erro de build no Vercel
+fix(app): corrigido useEffect incompleto que causava erro no Vercel
