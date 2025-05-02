@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 
 export default function AppApostas() {
-  const [intervalo, setIntervalo] = useState(() => {
-    const salvo = localStorage.getItem("intervaloFiltroMinutos");
-    return salvo ? parseInt(salvo) : 60;
+ const [intervalo, setIntervalo] = useState(60);
+
+useEffect(() => {
+  const salvo = localStorage.getItem("intervaloFiltroMinutos");
+  if (salvo) setIntervalo(parseInt(salvo));
+}, []);
+
   });
   const [apostas, setApostas] = useState([]);
   const [todasApostas, setTodasApostas] = useState([]);
