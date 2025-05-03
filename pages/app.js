@@ -49,6 +49,20 @@ export default function AppApostas() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
+    <div className='flex justify-end mb-2'>
+  <button
+    onClick={async () => {
+      const res = await fetch("/api/cron-importar-jogos");
+      const data = await res.json();
+      alert(`✅ ${data.result?.inseridos || 0} jogos importados com sucesso!`);
+      window.location.reload();
+    }}
+    className='text-sm bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700'
+  >
+    🔁 Importar Jogos do Dia
+  </button>
+</div>
+
       <div className='flex justify-end mb-2'>
         <button
           onClick={() => {
