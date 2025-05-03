@@ -17,17 +17,20 @@ export default function AppApostas() {
     fetch("/api/listar-apostas")
       .then(res => res.json())
       .then(data => {
-        const limite = new Date(agora.getTime() + intervalo * 60000);
-        const filtradas = data.filter(aposta =>
-          aposta.validado &&
-          new Date(aposta.data) > agora &&
-          new Date(aposta.data) <= limite
+        const hoje = new Date().toISOString().split("T")[0];
+        const apostasHoje = data.filter(a =>
+          a.validado && a.data.startsWith(hoje)
         );
+        const limite = new Date(agora.getTime() + intervalo * 60000);
+        const filtradas = apostasHoje.filter(aposta => {
+          const hora = new Date(aposta.data);
+          return hora > agora && hora <= limite;
+        });
         const filtradasCampeonato = filtroCampeonato
           ? filtradas.filter(a => a.campeonato?.toLowerCase().includes(filtroCampeonato.toLowerCase()))
           : filtradas;
         setApostas(filtradasCampeonato);
-        setTodasApostas(data.filter(a => a.validado));
+        setTodasApostas(apostasHoje);
       });
   }, [intervalo, filtroCampeonato]);
 
